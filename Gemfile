@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.6'
+gem 'bcrypt',         '3.1.12'
 gem 'bootstrap-sass', '3.3.7'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
@@ -17,7 +18,6 @@ gem 'jbuilder', '~> 2.5'
 
 # gem 'therubyracer', platforms: :ruby
 # gem 'redis', '~> 4.0'
-# gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
