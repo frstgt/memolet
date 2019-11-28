@@ -1,0 +1,3 @@
+michael:
+  name: Michael Example
+  password_digest: <%= User.digest('z81Km$@3rTEp#+2S') %>
