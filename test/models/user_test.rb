@@ -4,7 +4,8 @@ class UserTest < ActiveSupport::TestCase
 
   def setup
     @user = User.new(name: "Example User",
-                     password: "z8aKm$@3rTEp#+2s", password_confirmation: "z8aKm$@3rTEp#+2s")
+                     password: "z81Km$@3rTEp#+2S",
+                     password_confirmation: "z81Km$@3rTEp#+2S")
   end
 
   test "should be valid" do
@@ -38,35 +39,41 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "password should satisfy some requirements" do
-    password = "z8aKm$@3rTEp#+2s" # valid password
+    password = "z81Km$@3rTEp#+2S" # valid password
     @user.password = @user.password_confirmation = password
     assert @user.valid?
 
-    password = "z8aKm$@3rTEp#+2" # 15chars
+    password = "z81Km$@3rTEp#+S" # 15chars
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
 
-    password = "z8aKm$@3rTEp#+2s" * 4 + "E" # 65chars
+    password = "z81Km$@3rTEp#+2S" * 4 + "E" # 65chars
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
 
-    password = "z8akm$@3rtep#+2s" # no uppercase
+    password = "z81km$@3rtep#+2s" # no uppercase
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
-    password = "z8akm$@3rTep#+2s" # one uppercase
+    password = "z81km$@3rTep#+2s" # one uppercase
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
-    password = "z8aKm$@3rTep#+2s" # two uppercase
+    password = "z81Km$@3rTep#+2s" # two uppercase
+    @user.password = @user.password_confirmation = password
+    assert_not @user.valid?
+    password = "z81Km$@3rTEp#+2s" # three uppercase
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
 
-    password = "Z8AKM$@3RTEP#+2S" # no lowercase
+    password = "Z81KM$@3RTEP#+2S" # no lowercase
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
-    password = "Z8AKm$@3RTEP#+2S" # one lowercase
+    password = "Z81Km$@3RTEP#+2S" # one lowercase
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
-    password = "z8AKm$@3RTEP#+2S" # two lowercase
+    password = "z81Km$@3RTEP#+2S" # two lowercase
+    @user.password = @user.password_confirmation = password
+    assert_not @user.valid?
+    password = "z81Km$@3RTEp#+2S" # three lowercase
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
 
@@ -79,14 +86,20 @@ class UserTest < ActiveSupport::TestCase
     password = "z8aKm$@3rTEp#+bs" # two number
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
+    password = "z81Km$@3rTEp#+bs" # three number
+    @user.password = @user.password_confirmation = password
+    assert_not @user.valid?
 
-    password = "z8aKmDA3rTEpSP2s" # no special character
+    password = "z81KmDA3rTEpSP2s" # no special character
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
-    password = "z8aKmDA3rTEp#P2s" # one special character
+    password = "z81KmDA3rTEp#P2s" # one special character
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
-    password = "z8aKmD@3rTEp#P2s" # two special character
+    password = "z81KmD@3rTEp#P2s" # two special character
+    @user.password = @user.password_confirmation = password
+    assert_not @user.valid?
+    password = "z81Km$@3rTEp#P2s" # three special character
     @user.password = @user.password_confirmation = password
     assert_not @user.valid?
   end
