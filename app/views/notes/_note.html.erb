@@ -1,0 +1,15 @@
+<li id="note-<%= note.id %>" class="media">
+
+    <%= icon_for(note, { name: note.title, size: 64 }) %>
+
+    <div class="media-body">
+      <h5 class="mt-0 mb-1"><b><%= link_to note.title, note %></b></h5>
+      <p><%= note.outline %></p>
+
+      <span class="text-muted small">
+        <%= timestamp(note) %>
+      </span>
+
+    </div>
+
+</li>

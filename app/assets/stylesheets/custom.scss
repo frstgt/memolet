@@ -161,14 +161,59 @@ input {
 
 /* Users index */
 
-.users {
+.list_header {
+  background: $gray-lighter;
+  .count {
+    margin-left: 5px;
+  }
+  .command {
+    margin-right: 5px;
+  }
+}
+
+.users_list {
   list-style: none;
-  margin: 0;
+  padding: 0;
+  li {
+    margin-left: 0;
+    img {
+      float: left;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+.notes_list {
+  list-style: none;
+  padding: 0;
+  li {
+    img {
+      float: left;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+.memos_list {
+  list-style: none;
+  padding: 0;
   li {
     overflow: auto;
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
   }
+}
+
+.command {
+  float: right;
 }
 
 /* miscellaneous */

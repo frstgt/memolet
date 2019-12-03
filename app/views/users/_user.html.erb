@@ -1,8 +1,21 @@
-<li>
-  <%= icon_for user, size: 50 %>
-  <%= link_to user.name, user %>
-  <% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, method: :delete,
-                                  data: { confirm: "You sure?" } %>
-  <% end %>
+<li id="user-<%= user.id %>" class="media">
+
+  <%= icon_for(user, { name: user.name, size: 64 }) %>
+
+  <div class="media-body">
+
+    <h5 class="mt-0 mb-1"><b><%= link_to user.name, user %></b></h5>
+    <p><%= user.outline %></p>
+
+    <span class="text-muted small">
+      <%= timestamp(user) %>
+    </span>
+
+    <% if current_user.admin? && !current_user?(user) %>
+      <span class="command">
+        <%= link_to "[delete]", user, method: :delete,
+                                      data: { confirm: "You sure?" } %>
+      </span>
+    <% end %>
+  </div>
 </li>

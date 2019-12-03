@@ -1,0 +1,16 @@
+<li id="memo-<%= memo.id %>" class="media">
+
+    <div class="media-body">
+      <p><%= memo.content %></p>
+      <span class="text-muted small">
+        <%= timestamp(memo) %> (<%= memo.number %>)
+      </span>
+
+      <span class="command">
+        <%= link_to "[edit]", edit_note_memo_path(@note, memo) %>
+        <%= link_to "[delete]", note_memo_path(@note, memo),
+                                method: :delete, data: { confirm: "You sure?" } %>
+      </span>
+    </div>
+
+</li>

@@ -1,0 +1,41 @@
+<% provide(:title, @note.title) %>
+<div class="row">
+
+  <aside class="col-md-4">
+    <section class="note_info">
+      <h1><b><%= @note.title %></b></h1>
+      <%= icon_for @note, {name: @note.title, size: 256} %>
+      <p><%= @note.outline %></p>
+
+      <span class="text-muted small">
+        <%= timestamp(@note) %>
+      </span>
+
+      <span class="command">
+        <%= link_to "[edit]", edit_note_path(@note) %>
+        <%= link_to "[delete]", note_path(@note),
+                                method: :delete, data: { confirm: "You sure?" } %>
+      </span>
+
+    </section>
+  </aside>
+
+  <div class="col-md-8">
+
+    <div class="list_header">
+      <span class="count">
+        Memos (<%= @note.memos.count %>)
+      </count>
+      <span class="command">
+        <%= link_to "[new]", new_note_memo_path(@note) %>
+      </span>
+    </div>
+
+    <ul class="memos_list">
+      <%= render @memos %>
+    </ul>
+    <%= will_paginate @memos %>
+
+  </div>
+
+</div>

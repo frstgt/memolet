@@ -1,4 +1,4 @@
-<% provide(:title, 'Users') %>
+<% provide(:title, 'Notes') %>
 
 <div class="row">
 
@@ -10,12 +10,12 @@
 
     <div class="list_header">
       <span class="count">
-        Users (<%= User.count %>)
+        Notes (<%= Note.count %>)
       </count>
     </div>
 
     <ul class="users_list">
-      <%= render @users %>
+      <%= render @notes %>
     </ul>
     <%= will_paginate %>
 
