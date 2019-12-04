@@ -9,6 +9,7 @@ class NotesController < ApplicationController
   def show
     @note = current_user.notes.find(params[:id])
     @memos = @note.memos.paginate(page: params[:page])
+    @pictures = @note.pictures
   end
 
   def new

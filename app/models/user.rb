@@ -5,6 +5,8 @@ class User < ApplicationRecord
                     length: { minimum: 8, maximum: 64 },
                     uniqueness: true
 
+  default_scope -> { order(updated_at: :desc) }
+
   has_secure_password
   VALID_PASSWORD_REGEX = /(?=.*(\d+.*){4,})(?=.*([a-z]+.*){4,})(?=.*([A-Z]+.*){4,}).*([\-\+\/\*\%\^\&\|\~\<\=\>\"\'\`\;\:\[\]\{\}\(\)\!\?\@\#\$\,\.\_\\]+.*){4,}/
   validates :password, presence: true,

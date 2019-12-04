@@ -26,6 +26,20 @@
       </span>
 
     </section>
+
+    <div class="list_header">
+      <span class="count">
+        Pictures (<%= @note.pictures.count %>)
+      </count>
+      <span class="command">
+        <%= link_to "[new]", new_note_picture_path(@note) %>
+      </span>
+    </div>
+
+    <ul class="pictures_list">
+      <%= render @pictures %>
+    </ul>
+
   </aside>
 
   <div class="col-md-8">

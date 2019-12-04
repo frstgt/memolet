@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mathjax 'mathjax'
+
   root 'static_pages#home'
 
   get  '/help',    to: 'static_pages#help'
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   resources :notes
   resources :notes do
     resources :memos,    only: [:new, :create, :edit, :update, :destroy]
+    resources :pictures, only: [:new, :create, :edit, :update, :destroy]
   end
 
   resources :tags, only: [:show]

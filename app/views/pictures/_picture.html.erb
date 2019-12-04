@@ -1,0 +1,27 @@
+<li id="picture-<%= picture.id %>" class="media">
+
+  <% if picture.picture? %>
+    <%= image_tag picture.picture.url(:thumb), class: "icon mr-3" %>
+  <% end %>
+
+  <div class="media-body">
+
+    <div class="picture-url">
+      <% if picture.picture? %>
+        <%= link_to "#{picture.picture.url}", picture.picture.url %>
+      <% end %>
+    </div>
+
+    <div class="timestamp text-muted small">
+      <%= timestamp(picture) %>
+    </div>
+
+    <span class="command">
+      <%= link_to "[edit]", edit_note_picture_path(@note, picture) %>
+      <%= link_to "[delete]", note_picture_path(@note, picture),
+                              method: :delete, data: { confirm: "You sure?" } %>
+    </span>
+
+  </div>
+
+</li>

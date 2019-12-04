@@ -1,6 +1,7 @@
 class Note < ApplicationRecord
   belongs_to :user, touch: true
   has_many :memos, dependent: :destroy
+  has_many :pictures, dependent: :destroy
 
   has_many :active_tagships, class_name:  "Tagship",
                               foreign_key: "note_id",
