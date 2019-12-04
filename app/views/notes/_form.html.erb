@@ -8,6 +8,11 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :tag_list %> <label>(e.g. tag1, tag2, ...)</label>
+    <%= f.text_field :tag_list, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :outline %>
     <%= f.text_area :outline, rows: '10', class: 'form-control' %>
   </div>

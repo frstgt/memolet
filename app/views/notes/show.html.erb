@@ -4,7 +4,15 @@
   <aside class="col-md-4">
     <section class="note_info">
       <h1><b><%= @note.title %></b></h1>
+
+      <div class="tags small">
+        <% @note.tags.each do |tag| %>
+          <%= link_to tag.name, tag %>
+        <% end %>
+      </div>
+
       <%= icon_for @note, {name: @note.title, size: 256} %>
+
       <p><%= @note.outline %></p>
 
       <span class="text-muted small">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191203061415) do
+ActiveRecord::Schema.define(version: 20191203232242) do
 
   create_table "memos", force: :cascade do |t|
     t.text "content"
@@ -30,6 +30,23 @@ ActiveRecord::Schema.define(version: 20191203061415) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "updated_at"], name: "index_notes_on_user_id_and_updated_at"
     t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "tagships", force: :cascade do |t|
+    t.integer "note_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id", "tag_id"], name: "index_tagships_on_note_id_and_tag_id", unique: true
+    t.index ["note_id"], name: "index_tagships_on_note_id"
+    t.index ["tag_id"], name: "index_tagships_on_tag_id"
   end
 
   create_table "users", force: :cascade do |t|

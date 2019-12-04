@@ -18,6 +18,9 @@ class NotesController < ApplicationController
   def create
     @note = current_user.notes.build(note_params)
     if @note.save
+
+      @note.save_tag_list
+
       flash[:success] = "Note created"
       redirect_to current_user
     else
@@ -26,10 +29,14 @@ class NotesController < ApplicationController
   end
 
   def edit
+    @note.load_tag_list
   end
 
   def update
     if @note.update_attributes(note_params)
+
+      @note.save_tag_list
+
       flash[:success] = "Note updated"
       redirect_to @note
     else
@@ -46,7 +53,7 @@ class NotesController < ApplicationController
   private
 
     def note_params
-      params.require(:note).permit(:title, :outline)
+      params.require(:note).permit(:title, :outline, :tag_list)
     end
 
     def note_is_exist

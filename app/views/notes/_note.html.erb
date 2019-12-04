@@ -4,6 +4,13 @@
 
     <div class="media-body">
       <h5 class="mt-0 mb-1"><b><%= link_to note.title, note %></b></h5>
+
+      <div class="tags small">
+        <% note.tags.each do |tag| %>
+          <%= link_to tag.name, tag %>
+        <% end %>
+      </div>
+
       <p><%= note.outline %></p>
 
       <span class="text-muted small">
