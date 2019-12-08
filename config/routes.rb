@@ -4,9 +4,6 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  get  '/help',    to: 'static_pages#help'
-  get  '/about',   to: 'static_pages#about'
-
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   
@@ -16,12 +13,10 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :notes
+  resources :notes,      only: [:show, :new, :create, :edit, :update, :destroy]
   resources :notes do
     resources :memos,    only: [:new, :create, :edit, :update, :destroy]
     resources :pictures, only: [:new, :create, :edit, :update, :destroy]
   end
-
-  resources :tags, only: [:show]
 
 end

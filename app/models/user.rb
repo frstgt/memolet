@@ -14,6 +14,23 @@ class User < ApplicationRecord
                        format: { with: VALID_PASSWORD_REGEX },
                        allow_nil: true
 
+  MODE_LOCAL = 0
+  MODE_SITE  = 1
+  MODE_WEB   = 2
+  validates :mode, presence: true
+  def can_show?(user)
+    c1 = (self == user) # mine
+    c3 = (user && self.mode == MODE_SITE) # login user
+    c4 = (self.mode == MODE_WEB) # outsider
+    # c5 = (user && user.admin?)
+    c1 || c3 || c4 # || c5
+  end
+  def can_edit?(user)
+    c1 = self == user
+    # c5 = (user && user.admin?)
+    c1 # || c5
+  end
+
   def picture? # for debug
     false
   end

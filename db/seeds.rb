@@ -11,11 +11,13 @@ User.create!(
 9.times do |n|
   name  = Faker::Name.name
   outline = Faker::Lorem.sentence(20)
+  mode = [User::MODE_LOCAL, User::MODE_SITE, User::MODE_WEB].sample
   User.create!(
     name:  name,
     outline: outline,
     password:              password,
-    password_confirmation: password
+    password_confirmation: password,
+    mode: mode
   )
 end
 
@@ -37,9 +39,11 @@ users.each do |user|
   3.times do
     title = Faker::Book.title
     outline = Faker::Lorem.sentence(20)
+    mode = [Note::MODE_LOCAL, Note::MODE_SITE, Note::MODE_WEB].sample
     note = user.notes.create!(
       title: title,
-      outline: outline
+      outline: outline,
+      mode: mode
     )
 
     10.times do |i|
@@ -47,7 +51,11 @@ users.each do |user|
       note.memos.create!(content: content, number: i+1)
     end
 
-    tag_id = tag_ids.sample
-    Tagship.create(note_id: note.id, tag_id: tag_id)
+    1.times do
+      tag_id = tag_ids.sample
+      if tag_id
+        Tagship.create!(note_id: note.id, tag_id: tag_id)
+      end
+    end
   end
 end

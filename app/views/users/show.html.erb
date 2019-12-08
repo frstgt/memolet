@@ -3,8 +3,12 @@
 
   <aside class="col-md-4">
     <section class="user_info">
-      <h1><b><%= @user.name %></b></h1>
       <%= icon_for @user, {name: @user.name, size: 256} %>
+
+      <h1>
+        <b><%= @user.name %></b>
+        <%= badge(@user) %>
+      </h1>
 
       <p><%= @user.outline %></p>
 
@@ -12,11 +16,13 @@
         <%= timestamp(@user) %>
       </span>
 
-      <span class="command">
-        <%= link_to "[edit]", edit_user_path(@user) %>
-        <%= link_to "[delete]", user_path(@user), method: :delete,
-                                data: { confirm: "You sure?" } %>
-      </span>
+      <% if @user.can_edit?(current_user) %>
+        <span class="command">
+          <%= link_to "[edit]", edit_user_path(@user) %>
+          <%= link_to "[delete]", user_path(@user), method: :delete,
+                                  data: { confirm: "You sure?" } %>
+        </span>
+      <% end %>
     </section>
 
   </aside>
@@ -25,17 +31,20 @@
 
     <div class="list_header">
       <span class="count">
-        Notes (<%= @user.notes.count %>)
+        Notes (<%= @all_notes.count %>)
       </count>
-      <span class="command">
-        <%= link_to "[new]", new_note_path %>
-      </span>
+      
+      <% if @user.can_edit?(current_user) %>
+        <span class="command">
+          <%= link_to "[new]", new_note_path %>
+        </span>
+      <% end %>
     </div>
 
     <ul class="notes_list">
-      <%= render @notes %>
+      <%= render @page_notes, user: @user %>
     </ul>
-    <%= will_paginate @notes %>
+    <%= will_paginate @page_notes %>
 
   </div>
 

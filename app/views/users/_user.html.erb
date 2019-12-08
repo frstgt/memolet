@@ -4,18 +4,20 @@
 
   <div class="media-body">
 
-    <h5 class="mt-0 mb-1"><b><%= link_to user.name, user %></b></h5>
+    <h5 class="mt-0 mb-1">
+      <% if user.can_show?(current_user) %>
+        <b><%= link_to user.name, user %></b>
+      <% else %>
+        <b><%= user.name %></b>
+      <% end %>
+      <%= badge(user) %>
+    </h5>
+
     <p><%= user.outline %></p>
 
     <span class="text-muted small">
       <%= timestamp(user) %>
     </span>
 
-    <% if current_user.admin? && !current_user?(user) %>
-      <span class="command">
-        <%= link_to "[delete]", user, method: :delete,
-                                      data: { confirm: "You sure?" } %>
-      </span>
-    <% end %>
   </div>
 </li>

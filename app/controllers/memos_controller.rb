@@ -1,7 +1,8 @@
 class MemosController < ApplicationController
   before_action :logged_in_user
-  before_action :note_is_exist,   only: [:new, :create, :edit, :update, :destroy]
+  before_action :note_is_exist
   before_action :memo_is_exist,   only: [:edit, :update, :destroy]
+  before_action :user_can_edit
 
   def new
     @memo = @note.memos.build
@@ -61,6 +62,10 @@ class MemosController < ApplicationController
     def memo_is_exist
       @memo = @note.memos.find(params[:id])
       redirect_to root_url unless @memo
+    end
+
+    def user_can_edit
+      redirect_to root_url unless @note.can_edit?(current_user)
     end
 
 end

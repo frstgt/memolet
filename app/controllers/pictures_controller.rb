@@ -1,7 +1,8 @@
 class PicturesController < ApplicationController
   before_action :logged_in_user
   before_action :note_is_exist
-  before_action :picture_is_exist,  except: [:new, :create]
+  before_action :picture_is_exist,  only: [:edit, :update, :destroy]
+  before_action :user_can_edit
 
   def new
     @picture = @note.pictures.build
@@ -46,10 +47,13 @@ class PicturesController < ApplicationController
       @note = Note.find_by(id: params[:note_id])
       redirect_to root_url unless @note
     end
-
     def picture_is_exist
       @picture = @note.pictures.find_by(id: params[:id])
-      redirect_to root_url if @picture.nil?
+      redirect_to root_url unless @picture
+    end
+
+    def user_can_edit
+      redirect_to root_url unless @note.can_edit?(current_user)
     end
 
 end

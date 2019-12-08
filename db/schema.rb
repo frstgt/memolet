@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191204051453) do
+ActiveRecord::Schema.define(version: 20191208041600) do
 
   create_table "memos", force: :cascade do |t|
     t.text "content"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20191204051453) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "mode", default: 0
     t.index ["user_id", "updated_at"], name: "index_notes_on_user_id_and_updated_at"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 20191204051453) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.boolean "admin", default: false
+    t.integer "mode", default: 0
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 

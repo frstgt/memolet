@@ -1,13 +1,11 @@
 class NotesController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :destroy]
-  before_action :note_is_exist,   only: [:show, :edit, :update, :destroy]
-
-  def index
-    @notes = Note.paginate(page: params[:page])
-  end
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :note_is_exist,  only: [:show, :edit, :update, :destroy]
+  before_action :user_can_show,  only: :show
+  before_action :user_can_edit,  only: [:edit, :update, :destroy]
 
   def show
-    @note = current_user.notes.find(params[:id])
+    @note = Note.find(params[:id])
     @memos = @note.memos.paginate(page: params[:page])
     @pictures = @note.pictures
   end
@@ -58,8 +56,15 @@ class NotesController < ApplicationController
     end
 
     def note_is_exist
-      @note = current_user.notes.find(params[:id])
+      @note = Note.find(params[:id])
       redirect_to root_url unless @note
+    end
+
+    def user_can_show
+      redirect_to root_url unless @note.can_show?(current_user)
+    end
+    def user_can_edit
+      redirect_to root_url unless @note.can_edit?(current_user)
     end
 
 end
