@@ -9,15 +9,19 @@ gem 'rails', '~> 5.1.6'
 gem 'bcrypt',         '3.1.12'
 gem 'faker',          '1.7.3'
 gem 'carrierwave',             '1.2.2'
-gem 'mini_magick',             '4.7.0'
+
+gem "mini_magick", ">= 4.9.4"
 
 gem 'will_paginate',           '3.1.7'
 gem 'will_paginate-bootstrap4', '0.2.2'
-gem 'bootstrap', '~> 4.1.1'
+
+gem "bootstrap", ">= 4.3.1"
+
 gem 'sprockets-rails', '3.2.1'
 gem 'jquery-rails', '4.3.1'
 
-gem 'puma', '~> 3.7'
+gem "puma", ">= 3.12.2"
+
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
