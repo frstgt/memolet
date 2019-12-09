@@ -1,9 +1,11 @@
 <li id="memo-<%= memo.id %>" class="media">
 
     <div class="media-body">
-      <p><%= sanitize markdown(memo.content) %></p>
+      <div class="content">
+        <%= sanitize markdown(memo.content) %>
+      </div>
 
-      <span class="text-muted small">
+      <span class="timestamp number text-muted small">
         <%= timestamp(memo) %> (<%= memo.number %>)
       </span>
 

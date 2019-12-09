@@ -1,11 +1,14 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  content: MyText
+michael_note1_memo1:
+  content: "memo1 outline"
   number: 1
-  note: one
+  note: michael_note1
 
-two:
-  content: MyText
-  number: 1
-  note: two
+michael_note1_memo2:
+  content: "memo2 outline"
+  number: 2
+  note: michael_note1
+
+michael_note1_memo3:
+  content: "memo3 outline"
+  number: 3
+  note: michael_note1

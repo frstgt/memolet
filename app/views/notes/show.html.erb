@@ -6,16 +6,16 @@
 
       <%= icon_for @note, {name: @note.title, size: 256} %>
 
-      <div>
+      <div class="title">
         <b><%= @note.title %></b>
         <%= badge(@note) %>
       </div>
 
-      <div>
+      <div class="outline">
         <%= @note.outline %>
       </div>
 
-      <span class="text-muted small">
+      <span class="timestamp text-muted small">
         <%= timestamp(@note) %>
       </span>
 

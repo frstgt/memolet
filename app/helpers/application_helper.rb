@@ -27,7 +27,7 @@ module ApplicationHelper
   MODE_WEB   = 2
   def badge(object)
     if object.mode == MODE_LOCAL
-      content_tag(:span, "local", class: "badge badge-primary")
+      content_tag(:span, "local", class: "badge badge-success")
     elsif object.mode == MODE_SITE
       content_tag(:span, "site", class: "badge badge-warning")
     elsif object.mode == MODE_WEB

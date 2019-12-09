@@ -5,27 +5,35 @@
     <section class="user_info">
       <%= icon_for @user, {name: @user.name, size: 256} %>
 
-      <div>
+      <div class="name">
         <b><%= @user.name %></b>
         <%= badge(@user) %>
       </div>
 
-      <div>
+      <div class="outline">
         <%= @user.outline %>
       </div>
 
-      <span class="text-muted small">
+      <span class="timestamp text-muted small">
         <%= timestamp(@user) %>
       </span>
 
       <% if @user.can_edit?(current_user) %>
         <span class="command">
           <%= link_to "[edit]", edit_user_path(@user) %>
-          <%= link_to "[delete]", user_path(@user), method: :delete,
-                                  data: { confirm: "You sure?" } %>
+          <% unless @user.admin? %>
+            <%= link_to "[delete]", user_path(@user), method: :delete,
+                                    data: { confirm: "You sure?" } %>
+          <% end %>
         </span>
       <% end %>
     </section>
+
+    <div class="tags small">
+      <% @all_tags.each do |tag| %>
+        <%= link_to tag.name, user_path(@user, tag: tag.name) %>
+      <% end %>
+    </div>
 
   </aside>
 

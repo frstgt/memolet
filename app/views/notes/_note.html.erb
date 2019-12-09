@@ -3,7 +3,7 @@
     <%= icon_for(note, { name: note.title, size: 64 }) %>
 
     <div class="media-body">
-      <div>
+      <div class="title">
         <% if note.can_show?(current_user) %>
           <b><%= link_to note.title, note %></b>
         <% else %>
@@ -17,16 +17,16 @@
           <% if user %>
             <%= link_to tag.name, user_path(user, tag: tag.name) %>
           <% else %>
-            <%= link_to tag.name, root_path(tag: tag.name) %>
+            <%= link_to tag.name, notes_path(tag: tag.name) %>
           <% end %>
         <% end %>
       </span>
 
-      <div>
+      <div class="outline">
         <%= note.outline %>
       </div>
 
-      <span class="text-muted small">
+      <span class="timestamp text-muted small">
         <%= timestamp(note) %>
       </span>
 

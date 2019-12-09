@@ -31,6 +31,15 @@ class User < ApplicationRecord
     c1 # || c5
   end
 
+  def tag_notes(tag)
+    if tag
+      note_ids = "SELECT note_id FROM tagships WHERE user_id = :user_id and tag_id = :tag_id"
+      Note.where("id IN (#{note_ids})", user_id: id, tag_id: tag.id)
+    else
+      self.notes
+    end
+  end
+
   def picture? # for debug
     false
   end

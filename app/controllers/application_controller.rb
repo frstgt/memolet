@@ -45,4 +45,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def tag_notes(tag)
+    if tag
+      tag.notes
+    else
+      Note.all
+    end
+  end
+
+  def notes_tags(notes)
+    if notes
+      tag_ids = "SELECT tag_id FROM tagships WHERE note_id IN (:note_ids)"
+      Tag.where("id IN (#{tag_ids})", note_ids: notes.ids)
+    else
+      nil
+    end
+  end
+
 end

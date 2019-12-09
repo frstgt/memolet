@@ -1,24 +1,29 @@
-<% password = 'z81Km$@3rTEp#+2S' %>
+<% password_digest = User.digest('z81Km$@3rTEp#+2S') %>
 
 michael:
   name: Michael Example
-  password_digest: <%= User.digest(password) %>
+  password_digest: <%= password_digest %>
+  mode: 2
   admin: true
   
 archer:
   name: Sterling Archer
-  password_digest: <%= User.digest(password) %>
+  password_digest: <%= password_digest %>
+  mode: 2
   
 lana:
   name: Lana Kane
-  password_digest: <%= User.digest(password) %>
+  password_digest: <%= password_digest %>
+  mode: 1
 
 malory:
   name: Malory Archer
-  password_digest: <%= User.digest(password) %>
+  password_digest: <%= password_digest %>
+  mode: 0
 
 <% 30.times do |n| %>
 user_<%= n %>:
   name:  <%= "User #{n}" %>
-  password_digest: <%= User.digest(password) %>
+  password_digest: <%= password_digest %>
+  mode: <%= [0,1,2].sample %>
 <% end %>

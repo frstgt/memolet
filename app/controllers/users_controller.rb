@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :user_is_exist,  only: [:show, :edit, :update, :destroy]
   before_action :user_can_show,  only: :show
   before_action :user_can_edit,  only: [:edit, :update, :destroy]
+  before_action :user_cannot_delete_admin, only: :destroy
 
   def index
     if current_user
@@ -10,19 +11,24 @@ class UsersController < ApplicationController
     else
       @all_users = User.where(mode: User::MODE_WEB)
     end
+ 
     @page_users = @all_users.paginate(page: params[:page])
   end
 
   def show
     @tag = Tag.find_by(name: params[:tag])
-    @all_notes = (@tag) ? @tag.user_notes(@user) : @user.notes
 
     if current_user
-      if !current_user?(@user)
-        @all_notes = @all_notes.where.not(mode: Note::MODE_LOCAL)
+      if current_user?(@user)
+        @all_notes = @user.tag_notes(@tag)
+        @all_tags = notes_tags(@user.notes)
+      else
+        @all_notes = @user.tag_notes(@tag).where.not(mode: Note::MODE_LOCAL)
+        @all_tags = notes_tags(@user.notes.where.not(mode: Note::MODE_LOCAL))
       end
     else
-      @all_notes = @all_notes.where(mode: Note::MODE_WEB)
+      @all_notes = @user.tag_notes(@tag).where(mode: Note::MODE_WEB)
+      @all_tags = notes_tags(@user.notes.where(mode: Note::MODE_WEB))
     end
 
     @page_notes = @all_notes.paginate(page: params[:page])
@@ -56,7 +62,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    @user.destroy
     flash[:success] = "User deleted"
     redirect_to users_url
   end
@@ -80,6 +86,10 @@ class UsersController < ApplicationController
     end
     def user_can_edit
       redirect_to root_url unless @user.can_edit?(current_user)
+    end
+
+    def user_cannot_delete_admin
+      redirect_to root_url if @user.admin?
     end
 
 end

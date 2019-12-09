@@ -3,9 +3,9 @@ require 'test_helper'
 class MemoTest < ActiveSupport::TestCase
 
   def setup
-    @note = notes(:michael_note)
+    @note = notes(:michael_note1)
     @memo = @note.memos.build(
-      content: "content for test",
+      content: "test content",
       number: 1
     )
   end

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :notes,      only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :notes
   resources :notes do
     resources :memos,    only: [:new, :create, :edit, :update, :destroy]
     resources :pictures, only: [:new, :create, :edit, :update, :destroy]

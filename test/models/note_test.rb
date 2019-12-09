@@ -34,4 +34,9 @@ class NoteTest < ActiveSupport::TestCase
     assert_not @note.valid?
   end
 
+  test "mode should be present" do
+    @note.mode = "    "
+    assert_not @note.valid?
+  end
+
 end

@@ -4,6 +4,20 @@ class NotesController < ApplicationController
   before_action :user_can_show,  only: :show
   before_action :user_can_edit,  only: [:edit, :update, :destroy]
 
+  def index
+    @tag = Tag.find_by(name: params[:tag])
+
+    if current_user
+      @all_notes = tag_notes(@tag).where.not(mode: Note::MODE_LOCAL)
+      @all_tags = notes_tags(Note.where.not(mode: Note::MODE_LOCAL))
+    else
+      @all_notes = tag_notes(@tag).where(mode: Note::MODE_WEB)
+      @all_tags = notes_tags(Note.where(mode: Note::MODE_WEB))
+    end
+
+    @page_notes = @all_notes.paginate(page: params[:page])
+  end
+
   def show
     @note = Note.find(params[:id])
     @memos = @note.memos.paginate(page: params[:page])

@@ -1,4 +1,19 @@
-michael_note:
-  title: "title for test"
-  outline: "outline for test"
-  user: michael
+<% ['michael','archer','lana', 'malory'].each do |user| %>
+<%= user %>_note1:
+  title: "note1 title"
+  outline: "note1 outline"
+  mode: 2
+  user: <%= user %>
+
+<%= user %>_note2:
+  title: "note2 title"
+  outline: "note2 outline"
+  mode: 1
+  user: <%= user %>
+
+<%= user %>_note3:
+  title: "note3 title"
+  outline: "note3 outline"
+  mode: 0
+  user: <%= user %>
+<% end %>

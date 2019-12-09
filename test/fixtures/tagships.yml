@@ -1,9 +1,11 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+tagship1:
+  note: michael_note1
+  tag: tag1
 
-one:
-  note_id: 1
-  tag_id: 1
+tagship2:
+  note: michael_note2
+  tag: tag2
 
-two:
-  note_id: 1
-  tag_id: 1
+tagship3:
+  note: michael_note3
+  tag: tag3

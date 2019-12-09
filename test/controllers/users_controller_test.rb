@@ -5,11 +5,66 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     @other_user = users(:archer)
+    @site_user = users(:lana)
+    @local_user = users(:malory)
   end
 
-  test "should redirect index when not logged in" do
+  test "should get index" do
     get users_path
-    assert_redirected_to login_url
+    assert_response :success
+    assert_template 'users/index'
+    assert_select 'span.badge', "web"
+    assert_no_match "site", response.body
+    assert_no_match "local", response.body
+
+    log_in_as(@user)
+    get users_path
+    assert_response :success
+    assert_template 'users/index'
+    assert_select 'span.badge', 'web'
+    assert_select 'span.badge', 'site'
+    assert_no_match "local", response.body
+  end
+
+  test "should get show" do
+    get user_path(@local_user)
+    assert_redirected_to root_url
+
+    get user_path(@site_user)
+    assert_redirected_to root_url
+
+    get user_path(@user)
+    assert_response :success
+    assert_template 'users/show'
+    assert_select 'span.badge', "web"
+    assert_no_match "site", response.body
+    assert_no_match "local", response.body
+
+    log_in_as(@other_user)
+    get user_path(@local_user)
+    assert_redirected_to root_url
+
+    get user_path(@site_user)
+    assert_response :success
+    assert_template 'users/show'
+    assert_select 'span.badge', "web"
+    assert_select 'span.badge', 'site'
+    assert_no_match "local", response.body
+  
+    get user_path(@user)
+    assert_response :success
+    assert_template 'users/show'
+    assert_select 'span.badge', 'web'
+    assert_select 'span.badge', 'site'
+    assert_no_match "local", response.body
+
+    log_in_as(@user)
+    get user_path(@user)
+    assert_response :success
+    assert_template 'users/show'
+    assert_select 'span.badge', 'web'
+    assert_select 'span.badge', 'site'
+    assert_select 'span.badge', 'local'
   end
 
   test "should get new" do

@@ -4,18 +4,20 @@
 
   <div class="media-body">
 
-    <% if user.can_show?(current_user) %>
-      <b><%= link_to user.name, user %></b>
-    <% else %>
-      <b><%= user.name %></b>
-    <% end %>
-    <%= badge(user) %>
+    <div class="name">
+      <% if user.can_show?(current_user) %>
+        <b><%= link_to user.name, user %></b>
+      <% else %>
+        <b><%= user.name %></b>
+      <% end %>
+      <%= badge(user) %>
+    </div>
 
-    <div>
+    <div class="outline">
       <%= user.outline %>
     </div>
 
-    <span class="text-muted small">
+    <span class="timestamp text-muted small">
       <%= timestamp(user) %>
     </span>
 

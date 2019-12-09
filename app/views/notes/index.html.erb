@@ -1,0 +1,35 @@
+<% provide(:title, 'Notes') %>
+
+<div class="row">
+
+  <aside class="col-md-4">
+
+    <%= render 'static_pages/home_title' %>
+
+    <div class="tags small">
+      <% @all_tags.each do |tag| %>
+        <%= link_to tag.name, notes_path(tag: tag.name) %>
+      <% end %>
+    </div>
+
+    <%= render 'static_pages/home_logos' %>
+
+  </aside>
+
+  <div class="col-md-8">
+
+    <div class="list_header">
+      <span class="count">
+        Notes (<%= @all_notes.count %>)
+      </count>
+    </div>
+
+    <ul class="notes_list">
+      <%= render @page_notes, user: nil %>
+    </ul>
+    
+    <%= will_paginate @page_notes, renderer: will_paginate_renderer %>
+
+  </div>
+
+</div>

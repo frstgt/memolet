@@ -19,11 +19,9 @@
 
   <div class="form-group">
     <%= f.label :mode %>
-    <%= f.select :mode, [
-      ["Local", Note::MODE_LOCAL],
-      ["Site",  Note::MODE_SITE ],
-      ["Web",   Note::MODE_WEB  ]
-    ], class: 'form-control' %>
+    <%= f.select :mode,
+                  [["Local", Note::MODE_LOCAL],["Site", Note::MODE_SITE],["Web", Note::MODE_WEB]],
+                  {}, class: 'form-control' %>
   </div>
 
   <div class="form-group">
