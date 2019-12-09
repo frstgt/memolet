@@ -13,7 +13,7 @@ gem 'mini_magick',             '4.7.0'
 
 gem 'will_paginate',           '3.1.7'
 gem 'will_paginate-bootstrap4', '0.2.2'
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem 'sprockets-rails', '3.2.1'
 gem 'jquery-rails', '4.3.1'
 
