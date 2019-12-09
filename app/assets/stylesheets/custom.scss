@@ -1,7 +1,14 @@
-@import "bootstrap-sprockets";
 @import "bootstrap";
 
 /* mixins, variables, etc. */
+
+$gray-base: #000 !default;
+$gray-darker: lighten($gray-base, 13.5%) !default; // #222
+$gray: lighten($gray-base, 33.5%) !default; // #555
+$gray-lighter: lighten($gray-base, 46.7%) !default; // #777
+$gray-light: $gray-lighter;
+
+$state-danger-text: #a94442 !default;
 
 $gray-medium-light: #eaeaea;
 
@@ -84,19 +91,24 @@ q {
 
 /* header */
 
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  &:hover {
+header {
+
+  #logo {
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
     color: white;
-    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    padding-top: 3px;
+    font-weight: bold;
+    &:hover {
+      color: white;
+      text-decoration: none;
+    }
   }
+
+  margin-bottom: 20px;
 }
 
 /* footer */
@@ -125,30 +137,26 @@ footer {
   }
 }
 
+.row {
+  .col-md-4 {
+    padding-left: 0px;
+    padding-right: 10px;
+  }
+  .col-md-8 {
+    padding-left: 10px;
+    padding-right: 0px;
+  }
+}
+
 /* sidebar */
 
 aside {
-  section.user_info {
-    margin-top: 20px;
-  }
   section {
     padding: 10px 0;
     margin-top: 20px;
     &:first-child {
       border: 0;
       padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
     }
   }
 }
@@ -175,7 +183,9 @@ input {
 }
 
 .field_with_errors {
-  @extend .has-error;
+  input {
+    @extend .is-invalid;
+  }
   .form-control {
     color: $state-danger-text;
   }
@@ -189,7 +199,7 @@ input {
 /* list: users, notes, memos, pictures */
 
 .list_header {
-  background: $gray-lighter;
+  background: #e8e8e8;
   .count {
     margin-left: 5px;
   }
@@ -198,34 +208,12 @@ input {
   }
 }
 
-.users_list {
+.users_list, .notes_list {
   list-style: none;
   padding: 0;
   li {
-    margin-left: 0;
-    img {
-      float: left;
-      margin-top: 10px;
-      margin-right: 10px;
-    }
-    overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-  }
-}
-
-.notes_list {
-  list-style: none;
-  padding: 0;
-  li {
-    img {
-      float: left;
-      margin-top: 10px;
-      margin-right: 10px;
-    }
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid #e8e8e8;
   }
 }
 
@@ -234,7 +222,7 @@ input {
   padding: 0;
   li {
     padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid #e8e8e8;
 
     font-size: initial;
     ul{
@@ -262,7 +250,7 @@ input {
 }
 
 .tags {
-  background: $gray-lighter;
+  background: #f8f8f8;
   margin-bottom: 10px;
 }
 

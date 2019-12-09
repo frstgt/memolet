@@ -3,16 +3,16 @@
     <%= icon_for(note, { name: note.title, size: 64 }) %>
 
     <div class="media-body">
-      <h5 class="mt-0 mb-1">
+      <div>
         <% if note.can_show?(current_user) %>
           <b><%= link_to note.title, note %></b>
         <% else %>
           <b><%= note.title %></b>
         <% end %>
         <%= badge(note) %>
-      </h5>
+      </div>
 
-      <div class="tags small">
+      <span class="tags small">
         <% note.tags.each do |tag| %>
           <% if user %>
             <%= link_to tag.name, user_path(user, tag: tag.name) %>
@@ -20,9 +20,11 @@
             <%= link_to tag.name, root_path(tag: tag.name) %>
           <% end %>
         <% end %>
-      </div>
+      </span>
 
-      <p><%= note.outline %></p>
+      <div>
+        <%= note.outline %>
+      </div>
 
       <span class="text-muted small">
         <%= timestamp(note) %>

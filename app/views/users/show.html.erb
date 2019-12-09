@@ -5,12 +5,14 @@
     <section class="user_info">
       <%= icon_for @user, {name: @user.name, size: 256} %>
 
-      <h1>
+      <div>
         <b><%= @user.name %></b>
         <%= badge(@user) %>
-      </h1>
+      </div>
 
-      <p><%= @user.outline %></p>
+      <div>
+        <%= @user.outline %>
+      </div>
 
       <span class="text-muted small">
         <%= timestamp(@user) %>
@@ -44,7 +46,7 @@
     <ul class="notes_list">
       <%= render @page_notes, user: @user %>
     </ul>
-    <%= will_paginate @page_notes %>
+    <%= will_paginate @page_notes, renderer: will_paginate_renderer %>
 
   </div>
 

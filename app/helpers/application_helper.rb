@@ -40,4 +40,8 @@ module ApplicationHelper
     " updated #{time_ago_in_words(object.updated_at)} ago."
   end
 
+  def will_paginate_renderer
+    WillPaginate::ActionView::BootstrapLinkRenderer
+  end
+
 end

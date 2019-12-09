@@ -6,12 +6,14 @@
 
       <%= icon_for @note, {name: @note.title, size: 256} %>
 
-      <h1>
+      <div>
         <b><%= @note.title %></b>
         <%= badge(@note) %>
-      </h1>
+      </div>
 
-      <p><%= @note.outline %></p>
+      <div>
+        <%= @note.outline %>
+      </div>
 
       <span class="text-muted small">
         <%= timestamp(@note) %>
@@ -61,7 +63,7 @@
     <ul class="memos_list">
       <%= render @memos %>
     </ul>
-    <%= will_paginate @memos %>
+    <%= will_paginate @memos, renderer: will_paginate_renderer %>
 
   </div>
 

@@ -36,7 +36,7 @@ tag_ids.append(nil)
 # notes & memos
 users.each do |user|
 
-  3.times do
+  10.times do
     title = Faker::Book.title
     outline = Faker::Lorem.sentence(20)
     mode = [Note::MODE_LOCAL, Note::MODE_SITE, Note::MODE_WEB].sample
