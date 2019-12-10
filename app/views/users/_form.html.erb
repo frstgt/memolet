@@ -24,6 +24,15 @@
                     {}, class: 'form-control' %>
     </div>
 
+    <% if @user.admin? %>
+      <div class="form-group">
+        <%= f.label :administrator_enable %>
+        <%= f.select :admin_en,
+                      [["Disable", false], ["Enable", true]],
+                      {}, class: 'form-control' %>
+      </div>
+    <% end %>
+
     <div class="form-group">
       <%= f.label :picture %><br>
       <%= icon_for(@user, { name: @user.picture.url, size: 32 }) %>

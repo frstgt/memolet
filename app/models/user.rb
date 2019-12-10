@@ -25,13 +25,13 @@ class User < ApplicationRecord
     c1 = (self == user) # mine
     c3 = (user && self.mode == MODE_SITE) # login user
     c4 = (self.mode == MODE_WEB) # outsider
-    # c5 = (user && user.admin?)
-    c1 || c3 || c4 # || c5
+    c5 = (user && user.admin_en? && user.admin?)
+    c1 || c3 || c4 || c5
   end
   def can_edit?(user)
     c1 = self == user
-    # c5 = (user && user.admin?)
-    c1 # || c5
+    c5 = (user && user.admin_en? && user.admin?)
+    c1 || c5
   end
 
   def tag_notes(tag)

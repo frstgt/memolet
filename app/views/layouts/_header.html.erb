@@ -4,6 +4,10 @@
 
     <%= link_to "memolet", root_path, id: "logo", class: "navbar-brand" %>
 
+    <% if current_user && current_user.admin_en? && current_user.admin? %>
+      <b class="bg-white">[ ADMIN ]</b>
+    <% end %>
+
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
       <li class="nav-item"><%= link_to "Notes", notes_path, class: "nav-link" %></li>

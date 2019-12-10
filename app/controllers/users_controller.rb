@@ -74,6 +74,7 @@ class UsersController < ApplicationController
                                     :password,
                                     :password_confirmation,
                                     :mode,
+                                    :admin_en,
                                     :picture)
     end
 

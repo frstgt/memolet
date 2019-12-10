@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191209222818) do
+ActiveRecord::Schema.define(version: 20191210034053) do
 
   create_table "memos", force: :cascade do |t|
     t.text "content"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20191209222818) do
     t.boolean "admin", default: false
     t.integer "mode", default: 0
     t.string "picture"
+    t.boolean "admin_en", default: false
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
