@@ -31,14 +31,17 @@ module ApplicationHelper
   MODE_SITE  = 1
   MODE_WEB   = 2
   def badge(object)
+    if object.mode == MODE_LOCAL
+      content_tag(:span, "local", class: "badge badge-success")
+    elsif object.mode == MODE_SITE
+      content_tag(:span, "site", class: "badge badge-warning")
+    elsif object.mode == MODE_WEB
+      content_tag(:span, "web", class: "badge badge-danger")
+    end
+  end
+  def site_badge(object)
     if object
-      if object.mode == MODE_LOCAL
-        content_tag(:span, "local", class: "badge badge-success")
-      elsif object.mode == MODE_SITE
-        content_tag(:span, "site", class: "badge badge-warning")
-      elsif object.mode == MODE_WEB
-        content_tag(:span, "web", class: "badge badge-danger")
-      end
+      badge(object)
     else
       content_tag(:span, "web", class: "badge badge-danger")
     end

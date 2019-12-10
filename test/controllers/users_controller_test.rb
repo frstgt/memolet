@@ -29,7 +29,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
     get user_path(@local_user)
     assert_redirected_to root_url
-
     get user_path(@site_user)
     assert_redirected_to root_url
 

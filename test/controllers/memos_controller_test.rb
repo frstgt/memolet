@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NotesControllerTest < ActionDispatch::IntegrationTest
+class MemosControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:michael)
@@ -13,61 +13,9 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     @local_note = notes(:michael_note3)
   end
 
-  test "should get index" do
-    get notes_path
-    assert_response :success
-    assert_template 'notes/index'
-    assert_select 'span.badge', "web"
-    assert_no_match "site", response.body
-    assert_no_match "local", response.body
-
-    log_in_as(@user)
-    get notes_path
-    assert_response :success
-    assert_template 'notes/index'
-    assert_select 'span.badge', 'web'
-    assert_select 'span.badge', 'site'
-    assert_no_match "local", response.body
-  end
-
-  test "should get show" do
-    get note_path(@local_note)
-    assert_redirected_to root_url
-    get note_path(@site_note)
-    assert_redirected_to root_url
-    get note_path(@web_note)
-    assert_response :success
-    assert_template 'notes/show'
-    assert_select 'span.badge', 'web'
-
-    log_in_as(@other_user)
-    get note_path(@local_note)
-    assert_redirected_to root_url
-    get note_path(@site_note)
-    assert_response :success
-    assert_template 'notes/show'
-    assert_select 'span.badge', 'site'
-    get note_path(@web_note)
-    assert_response :success
-    assert_template 'notes/show'
-    assert_select 'span.badge', 'web'
-
-    log_in_as(@user)
-    get note_path(@local_note)
-    assert_response :success
-    assert_template 'notes/show'
-    assert_select 'span.badge', 'local'
-    get note_path(@site_note)
-    assert_response :success
-    assert_template 'notes/show'
-    assert_select 'span.badge', 'site'
-    get note_path(@web_note)
-    assert_response :success
-    assert_template 'notes/show'
-    assert_select 'span.badge', 'web'
-  end
-
   test "should get new/create" do
+    skip "under construction"
+
     get new_note_path
     assert_redirected_to login_url
 
@@ -85,6 +33,8 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit/update" do
+    skip "under construction"
+
     get edit_note_path(@web_note)
     assert_redirected_to login_url
     patch note_path(@web_note), params: { note: { title: @web_note.title, outline: "This is a edit test." } }
@@ -105,6 +55,8 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get delete" do
+    skip "under construction"
+
     assert_difference '@user.notes.count', 0 do
       delete note_path(@web_note)
     end

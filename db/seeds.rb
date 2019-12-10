@@ -1,5 +1,7 @@
-password = 'z81Km$@3rTEp#+2S'
 
+Site.create()
+
+password = 'z81Km$@3rTEp#+2S'
 User.create!(
   name:  "Example User",
   outline: "It's an example user account.",
@@ -7,6 +9,8 @@ User.create!(
   password_confirmation: password,
   admin: true
 )
+
+# exit
 
 9.times do |n|
   name  = Faker::Name.name
