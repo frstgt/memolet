@@ -19,4 +19,6 @@ Rails.application.routes.draw do
     resources :pictures, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  resources :sites, only: [:edit, :update]
+
 end

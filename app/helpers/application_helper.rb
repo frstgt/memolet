@@ -1,7 +1,12 @@
 module ApplicationHelper
 
+  def app_name
+    site = Site.first
+    (site) ? site.name : "Memolet"
+  end
+
   def full_title(page_title = '')
-    base_title = "Memolet"
+    base_title = app_name
     if page_title.empty?
       base_title
     else
@@ -26,11 +31,15 @@ module ApplicationHelper
   MODE_SITE  = 1
   MODE_WEB   = 2
   def badge(object)
-    if object.mode == MODE_LOCAL
-      content_tag(:span, "local", class: "badge badge-success")
-    elsif object.mode == MODE_SITE
-      content_tag(:span, "site", class: "badge badge-warning")
-    elsif object.mode == MODE_WEB
+    if object
+      if object.mode == MODE_LOCAL
+        content_tag(:span, "local", class: "badge badge-success")
+      elsif object.mode == MODE_SITE
+        content_tag(:span, "site", class: "badge badge-warning")
+      elsif object.mode == MODE_WEB
+        content_tag(:span, "web", class: "badge badge-danger")
+      end
+    else
       content_tag(:span, "web", class: "badge badge-danger")
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191210034053) do
+ActiveRecord::Schema.define(version: 20191210053442) do
 
   create_table "memos", force: :cascade do |t|
     t.text "content"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20191210034053) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["note_id"], name: "index_pictures_on_note_id"
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.string "name", default: "Memolet"
+    t.integer "mode", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|

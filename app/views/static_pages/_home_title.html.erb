@@ -1,11 +1,13 @@
 <div class="center jumbotron">
-  <h1>Welcome to Memolet</h1>
+  <h1>Welcome to <%= app_name %></h1>
 
   <p>
     This is a memo application.
   </p>
 
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-primary" %>
+  <% if User.can_new?(current_user) %>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-primary" %>
+  <% end %>
 </div>
 
 

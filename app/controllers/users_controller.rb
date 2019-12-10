@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :user_is_exist,  only: [:show, :edit, :update, :destroy]
   before_action :user_can_show,  only: :show
+  before_action :user_can_new,   only: [:new, :create]
   before_action :user_can_edit,  only: [:edit, :update, :destroy]
   before_action :user_cannot_delete_admin, only: :destroy
 
@@ -37,7 +38,6 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-
   def create
     @user = User.new(user_params)
     if @user.save
@@ -51,10 +51,9 @@ class UsersController < ApplicationController
 
   def edit
   end
-
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "User updated"
       redirect_to @user
     else
       render 'edit'
@@ -85,6 +84,9 @@ class UsersController < ApplicationController
 
     def user_can_show
       redirect_to root_url unless @user.can_show?(current_user)
+    end
+    def user_can_new
+      redirect_to root_url unless User.can_new?(current_user)
     end
     def user_can_edit
       redirect_to root_url unless @user.can_edit?(current_user)

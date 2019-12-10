@@ -1,0 +1,22 @@
+<%= form_for(@site) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, type: "text", class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :mode %>
+    <%= f.select :mode,
+                  [["Local", User::MODE_LOCAL], ["Site", User::MODE_SITE], ["Web", User::MODE_WEB]],
+                  {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group text-right">
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  </div>
+
+<% end %>
+
+<%= render 'static_pages/help_about_site_mode' %>

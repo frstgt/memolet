@@ -28,6 +28,13 @@ class User < ApplicationRecord
     c5 = (user && user.admin_en? && user.admin?)
     c1 || c3 || c4 || c5
   end
+  def self.can_new?(user)
+    site = Site.first
+    c1 = site && site.mode == Site::MODE_LOCAL && user && user.admin_en? && user.admin?
+    c2 = site && site.mode == Site::MODE_SITE && user
+    c3 = (!site) || (site && site.mode == Site::MODE_WEB)
+    c1 || c2 || c3
+  end
   def can_edit?(user)
     c1 = self == user
     c5 = (user && user.admin_en? && user.admin?)
