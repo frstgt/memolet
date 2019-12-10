@@ -208,7 +208,7 @@ input {
   }
 }
 
-.users_list, .notes_list {
+.users_list, .notes_list, .pictures_list {
   list-style: none;
   padding: 0;
   li {
@@ -230,19 +230,6 @@ input {
       padding: initial;
       border: initial;
     }
-  }
-}
-
-.pictures_list {
-  list-style: none;
-  padding: 0;
-  img {
-    float: left;
-    margin-right: 10px;
-  }
-  li {
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
   }
 }
 

@@ -14,6 +14,9 @@ class Note < ApplicationRecord
   validates :title, presence: true, length: { maximum: 100 }
   validates :outline, length: { maximum: 1000 }
 
+  mount_uploader :picture, PictureUploader
+  validate  :picture_size
+
   MODE_LOCAL = 0
   MODE_SITE  = 1
   MODE_WEB   = 2
@@ -60,8 +63,12 @@ class Note < ApplicationRecord
     end
   end
 
-  def picture? # for debug
-    false
-  end
+  private
+
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB")
+      end
+    end
 
 end

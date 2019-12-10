@@ -14,6 +14,9 @@ class User < ApplicationRecord
                        format: { with: VALID_PASSWORD_REGEX },
                        allow_nil: true
 
+  mount_uploader :picture, PictureUploader
+  validate  :picture_size
+
   MODE_LOCAL = 0
   MODE_SITE  = 1
   MODE_WEB   = 2
@@ -40,14 +43,18 @@ class User < ApplicationRecord
     end
   end
 
-  def picture? # for debug
-    false
-  end
-
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  private
+
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB")
+      end
+    end
 
 end

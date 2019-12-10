@@ -6,7 +6,6 @@ class Picture < ApplicationRecord
   default_scope -> { order(created_at: :asc) }
 
   mount_uploader :picture, PictureUploader
-
   validate  :picture_size
 
   private

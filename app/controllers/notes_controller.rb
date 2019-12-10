@@ -66,7 +66,11 @@ class NotesController < ApplicationController
   private
 
     def note_params
-      params.require(:note).permit(:title, :outline, :tag_list)
+      params.require(:note).permit(:title,
+                                    :outline,
+                                    :tag_list,
+                                    :mode,
+                                    :picture)
     end
 
     def note_is_exist

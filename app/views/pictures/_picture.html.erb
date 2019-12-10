@@ -1,12 +1,10 @@
 <li id="picture-<%= picture.id %>" class="media">
 
-  <% if picture.picture? %>
-    <%= image_tag picture.picture.url(:thumb), class: "icon mr-3" %>
-  <% end %>
+  <%= icon_for(picture, { name: picture.picture.url, size: 32 }) %>
 
   <div class="media-body">
 
-    <div class="picture-url">
+    <div class="picture-url small">
       <% if picture.picture? %>
         <%= link_to "#{picture.picture.url}", picture.picture.url %>
       <% end %>

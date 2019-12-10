@@ -73,7 +73,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name,
                                     :password,
                                     :password_confirmation,
-                                    :mode)
+                                    :mode,
+                                    :picture)
     end
 
     def user_is_exist
