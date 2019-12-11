@@ -69,6 +69,11 @@ code, .code, pre {
   white-space: pre;
   word-wrap: normal;
   padding: 5px 0px 3px 5px; // top right bottom left
+
+  & code {
+    white-space: pre-wrap;
+    margin-left: -5px;
+  }
 }
 
 table {
