@@ -72,6 +72,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name,
                                     :password,
                                     :password_confirmation,
+                                    :outline,
                                     :mode,
                                     :admin_en,
                                     :picture)
