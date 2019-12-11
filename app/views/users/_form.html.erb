@@ -18,6 +18,11 @@
 
   <% if current_user %>
     <div class="form-group">
+      <%= f.label :outline %>
+      <%= f.text_area :outline, rows: '10', class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :mode %>
       <%= f.select :mode,
                     [["Local", User::MODE_LOCAL], ["Site", User::MODE_SITE], ["Web", User::MODE_WEB]],
