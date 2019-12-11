@@ -1,14 +1,16 @@
-michael_note1_memo1:
+<% ['michael_note1', 'michael_note2', 'michael_note3'].each do |note| %>
+<%= note %>_memo1:
   content: "memo1 outline"
   number: 1
-  note: michael_note1
+  note: <%= note %>
 
-michael_note1_memo2:
+<%= note %>_memo2:
   content: "memo2 outline"
   number: 2
-  note: michael_note1
+  note: <%= note %>
 
-michael_note1_memo3:
+<%= note %>_memo3:
   content: "memo3 outline"
   number: 3
-  note: michael_note1
+  note: <%= note %>
+<% end %>

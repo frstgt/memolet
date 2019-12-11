@@ -5,6 +5,7 @@ michael:
   password_digest: <%= password_digest %>
   mode: 2
   admin: true
+  admin_en: true
   
 archer:
   name: Sterling Archer
