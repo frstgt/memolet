@@ -10,7 +10,7 @@ User.create!(
   admin: true
 )
 
-# exit
+ exit
 
 9.times do |n|
   name  = Faker::Name.name
