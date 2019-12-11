@@ -225,6 +225,9 @@ input {
     border-bottom: 1px solid #e8e8e8;
 
     font-size: initial;
+    ul, ol {
+      padding-left: 25px;
+    }
     li {
       margin: initial;
       padding: initial;
