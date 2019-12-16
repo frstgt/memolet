@@ -40,7 +40,7 @@ class Note < ApplicationRecord
     self.tags.each do |tag|
       tag_names.append(tag.name)
     end
-    self.tag_list = tag_names.join(",")
+    self.tag_list = tag_names.join(", ")
   end
   def save_tag_list
     active_tagships.each do |tagship|
@@ -54,12 +54,12 @@ class Note < ApplicationRecord
     if self.tag_list
       tag_names = self.tag_list.split(",")
       tag_names.each do |tag_name|
-        add_tag(tag_name)
+        add_tag(tag_name.strip)
       end
     end
   end
   def add_tag(tag_name)
-    tag = Tag.find_by(name: tag_name.strip)
+    tag = Tag.find_by(name: tag_name)
     if tag
       tagship = active_tagships.find_by(tag_id: tag.id)
       unless tagship
