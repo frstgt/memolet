@@ -5,7 +5,8 @@
     <%= link_to app_name, root_path, id: "logo", class: "navbar-brand" %>
     <%= badge(Site.first) %>
 
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
       <% if Site.first && Site.first.can_edit?(current_user) %>
         <li class="nav-item active dropdown">
           <a href="#" class="nav-link  dropdown-toggle" data-toggle="dropdown">
@@ -16,9 +17,6 @@
           </ul>
         </li>
       <% end %>
-    </ul>
-
-    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
       <li class="nav-item"><%= link_to "Notes", notes_path, class: "nav-link" %></li>
       <li class="nav-item"><%= link_to "Users", users_path, class: "nav-link" %></li>
