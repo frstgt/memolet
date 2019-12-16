@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="keywords" content="<%= yield(:keywords) %>">
+
     <title><%= full_title(yield(:title)) %></title>
+
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
     <%= mathjax_tag %>

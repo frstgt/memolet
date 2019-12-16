@@ -45,6 +45,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def make_tag_list(tags)
+    tag_names = []
+    tags.each do |tag|
+      tag_names.append(tag.name)
+    end
+    tag_names.join(", ")
+  end
+
   def tag_notes(tag)
     if tag
       tag.notes

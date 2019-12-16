@@ -39,13 +39,6 @@ module ApplicationHelper
       content_tag(:span, "web", class: "badge badge-danger")
     end
   end
-  def site_badge(object)
-    if object
-      badge(object)
-    else
-      content_tag(:span, "web", class: "badge badge-danger")
-    end
-  end
   
   def timestamp(object)
     "created #{time_ago_in_words(object.created_at)} ago." +
