@@ -54,12 +54,20 @@ class Note < ApplicationRecord
     if self.tag_list
       tag_names = self.tag_list.split(",")
       tag_names.each do |tag_name|
-        tag = Tag.find_by(name: tag_name)
-        unless tag
-          tag = Tag.create(name: tag_name)
-        end
+        add_tag(tag_name)
+      end
+    end
+  end
+  def add_tag(tag_name)
+    tag = Tag.find_by(name: tag_name.strip)
+    if tag
+      tagship = active_tagships.find_by(tag_id: tag.id)
+      unless tagship
         active_tagships.create(tag_id: tag.id)
       end
+    else
+      tag = Tag.create(name: tag_name)
+      active_tagships.create(tag_id: tag.id)
     end
   end
 

@@ -30,14 +30,7 @@ end
 users = User.all
 
 # tags
-["tag1", "tag2", "tag3", "tag4", "tag5"].each do |name|
-  Tag.create(name: name)
-end
-tag_ids = []
-Tag.order(:created_at).each do |tag|
-  tag_ids.append(tag.id)
-end
-tag_ids.append(nil)
+tag_names = ["tag0", "tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", nil]
 
 # notes & memos
 users.each do |user|
@@ -57,10 +50,10 @@ users.each do |user|
       note.memos.create!(content: content, number: i+1)
     end
 
-    1.times do
-      tag_id = tag_ids.sample
-      if tag_id
-        Tagship.create!(note_id: note.id, tag_id: tag_id)
+    3.times do
+      tag_name = tag_names.sample
+      if tag_name
+        note.add_tag(tag_name)
       end
     end
   end
