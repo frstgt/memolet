@@ -4,8 +4,11 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
-
     <%= mathjax_tag %>
+
+    <% if current_user.nil? # ad is for only outsider %>
+      <%= render 'layouts/google_ad' %>
+    <% end %>
   </head>
 
   <body>
