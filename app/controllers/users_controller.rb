@@ -21,23 +21,21 @@ class UsersController < ApplicationController
 
     if current_user
       if current_user?(@user)
-        @all_notes = @user.tag_notes(@tag)
-        @all_tags = notes_tags(@user.notes)
-        @author = ""
-        @description = ""
-        @keywords = ""
+        @all_notes = search_notes_with_tags(@user.notes, [@tag])
+        @all_tags = get_tags_from_notes(@user.notes)
+        @author = @description = @keywords = ""
       else
-        @all_notes = @user.tag_notes(@tag).where.not(mode: Note::MODE_LOCAL)
-        @all_tags = notes_tags(@user.notes.where.not(mode: Note::MODE_LOCAL))
-        @author = ""
-        @description = ""
-        @keywords = ""
+        no_local_notes = @user.notes.where.not(mode: Note::MODE_LOCAL)
+        @all_notes = search_notes_with_tags(no_local_notes, [@tag])
+        @all_tags = get_tags_from_notes(no_local_notes)
+        @author = @description = @keywords = ""
       end
     else
-      @all_notes = @user.tag_notes(@tag).where(mode: Note::MODE_WEB)
-      @all_tags = notes_tags(@user.notes.where(mode: Note::MODE_WEB))
-        @author = @user.name
-        @description = @user.outline
+      web_notes = @user.notes.where(mode: Note::MODE_WEB)
+      @all_notes = search_notes_with_tags(web_notes, [@tag])
+      @all_tags = get_tags_from_notes(web_notes)
+      @author = @user.name
+      @description = @user.outline
       @keywords = make_tag_list(@all_tags)
     end
 

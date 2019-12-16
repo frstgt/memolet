@@ -53,15 +53,17 @@ class ApplicationController < ActionController::Base
     tag_names.join(", ")
   end
 
-  def tag_notes(tag)
-    if tag
-      tag.notes
+  def search_notes_with_tags(notes, tags)
+    if tags && tags != [nil]
+      tag_ids = tags.map { |tag| tag.id }
+      note_ids = "SELECT note_id FROM tagships WHERE tag_id IN (:tag_ids)"
+      notes.where("id IN (#{note_ids})", tag_ids: tag_ids)
     else
-      Note.all
+      notes
     end
   end
 
-  def notes_tags(notes)
+  def get_tags_from_notes(notes)
     if notes
       tag_ids = "SELECT tag_id FROM tagships WHERE note_id IN (:note_ids)"
       Tag.where("id IN (#{tag_ids})", note_ids: notes.ids)

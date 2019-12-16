@@ -8,12 +8,14 @@ class NotesController < ApplicationController
     @tag = Tag.find_by(name: params[:tag])
 
     if current_user
-      @all_notes = tag_notes(@tag).where.not(mode: Note::MODE_LOCAL)
-      @all_tags = notes_tags(Note.where.not(mode: Note::MODE_LOCAL))
+      no_local_notes = Note.where.not(mode: Note::MODE_LOCAL)
+      @all_notes = search_notes_with_tags(no_local_notes, [@tag])
+      @all_tags = get_tags_from_notes(no_local_notes)
       @keywords = ""
     else
-      @all_notes = tag_notes(@tag).where(mode: Note::MODE_WEB)
-      @all_tags = notes_tags(Note.where(mode: Note::MODE_WEB))
+      web_notes = Note.where(mode: Note::MODE_WEB)
+      @all_notes = search_notes_with_tags(web_notes, [@tag])
+      @all_tags = get_tags_from_notes(web_notes)
       @keywords = make_tag_list(@all_tags)
     end
 
@@ -31,8 +33,7 @@ class NotesController < ApplicationController
       @description = @note.outline
       @keywords = make_tag_list(@note.tags)
     else
-      @description = ""
-      @keywords = ""
+      @description = @keywords = ""
     end
     @memos = @note.memos.paginate(page: params[:page])
     @pictures = @note.pictures
