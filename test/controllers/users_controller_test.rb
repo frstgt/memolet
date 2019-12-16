@@ -16,6 +16,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.badge', "web"
     assert_no_match "site", response.body
     assert_no_match "local", response.body
+    assert_match "dummy ad code", response.body
 
     log_in_as(@user)
     get users_path
@@ -24,6 +25,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.badge', 'web'
     assert_select 'span.badge', 'site'
     assert_no_match "local", response.body
+    assert_no_match "dummy ad code", response.body
   end
 
   test "should get show" do
@@ -38,10 +40,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.badge', "web"
     assert_no_match "site", response.body
     assert_no_match "local", response.body
+    assert_match "dummy ad code", response.body
 
     log_in_as(@other_user)
     get user_path(@local_user)
     assert_redirected_to root_url
+    assert_no_match "dummy ad code", response.body
 
     get user_path(@site_user)
     assert_response :success
@@ -49,6 +53,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.badge', "web"
     assert_select 'span.badge', 'site'
     assert_no_match "local", response.body
+    assert_no_match "dummy ad code", response.body
   
     get user_path(@user)
     assert_response :success
@@ -56,6 +61,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.badge', 'web'
     assert_select 'span.badge', 'site'
     assert_no_match "local", response.body
+    assert_no_match "dummy ad code", response.body
 
     log_in_as(@user)
     get user_path(@user)
@@ -64,6 +70,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.badge', 'web'
     assert_select 'span.badge', 'site'
     assert_select 'span.badge', 'local'
+    assert_no_match "dummy ad code", response.body
   end
 
   test "should get new" do

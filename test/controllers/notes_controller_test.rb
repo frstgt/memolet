@@ -20,6 +20,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.badge', "web"
     assert_no_match "site", response.body
     assert_no_match "local", response.body
+    assert_match "dummy ad code", response.body
 
     log_in_as(@user)
     get notes_path
@@ -28,6 +29,7 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.badge', 'web'
     assert_select 'span.badge', 'site'
     assert_no_match "local", response.body
+    assert_no_match "dummy ad code", response.body
   end
 
   test "should get show" do
@@ -39,32 +41,42 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template 'notes/show'
     assert_select 'span.badge', 'web'
+    assert_match "dummy ad code", response.body
 
     log_in_as(@other_user)
     get note_path(@local_note)
     assert_redirected_to root_url
+
     get note_path(@site_note)
     assert_response :success
     assert_template 'notes/show'
     assert_select 'span.badge', 'site'
+    assert_no_match "dummy ad code", response.body
+
     get note_path(@web_note)
     assert_response :success
     assert_template 'notes/show'
     assert_select 'span.badge', 'web'
+    assert_no_match "dummy ad code", response.body
 
     log_in_as(@user)
     get note_path(@local_note)
     assert_response :success
     assert_template 'notes/show'
     assert_select 'span.badge', 'local'
+    assert_no_match "dummy ad code", response.body
+
     get note_path(@site_note)
     assert_response :success
     assert_template 'notes/show'
     assert_select 'span.badge', 'site'
+    assert_no_match "dummy ad code", response.body
+
     get note_path(@web_note)
     assert_response :success
     assert_template 'notes/show'
     assert_select 'span.badge', 'web'
+    assert_no_match "dummy ad code", response.body
   end
 
   test "should get new/create" do
