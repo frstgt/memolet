@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="keywords" content="<%= yield(:keywords) %>">
+    <% if current_user.nil? # for only outsider %>
+      <meta name="keywords" content="<%= yield(:keywords) %>">
+    <% end %>
 
     <title><%= full_title(yield(:title)) %></title>
 
@@ -9,7 +11,7 @@
     <%= render 'layouts/shim' %>
     <%= mathjax_tag %>
 
-    <% if current_user.nil? # ad is for only outsider %>
+    <% if current_user.nil? # for only outsider %>
       <%= render 'layouts/google_ad' %>
     <% end %>
   </head>
