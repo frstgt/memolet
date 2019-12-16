@@ -10,7 +10,9 @@ User.create!(
   admin: true
 )
 
- exit
+if Rails.env.production?
+  exit
+end
 
 9.times do |n|
   name  = Faker::Name.name
