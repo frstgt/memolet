@@ -22,9 +22,16 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
+    if @note.user.mode == User::MODE_WEB
+      @author = @note.user.name
+    else
+      @author = ""
+    end
     if @note.mode == Note::MODE_WEB
+      @description = @note.outline
       @keywords = make_tag_list(@note.tags)
     else
+      @description = ""
       @keywords = ""
     end
     @memos = @note.memos.paginate(page: params[:page])

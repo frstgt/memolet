@@ -23,15 +23,21 @@ class UsersController < ApplicationController
       if current_user?(@user)
         @all_notes = @user.tag_notes(@tag)
         @all_tags = notes_tags(@user.notes)
+        @author = ""
+        @description = ""
         @keywords = ""
       else
         @all_notes = @user.tag_notes(@tag).where.not(mode: Note::MODE_LOCAL)
         @all_tags = notes_tags(@user.notes.where.not(mode: Note::MODE_LOCAL))
+        @author = ""
+        @description = ""
         @keywords = ""
       end
     else
       @all_notes = @user.tag_notes(@tag).where(mode: Note::MODE_WEB)
       @all_tags = notes_tags(@user.notes.where(mode: Note::MODE_WEB))
+        @author = @user.name
+        @description = @user.outline
       @keywords = make_tag_list(@all_tags)
     end
 
