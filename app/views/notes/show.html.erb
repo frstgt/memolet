@@ -15,6 +15,12 @@
         <%= badge(@note) %>
       </div>
 
+      <span class="tags small">
+        <% @note.tags.each do |tag| %>
+          <%= tag.name %>
+        <% end %>
+      </span>
+
       <div class="outline">
         <%= @note.outline %>
       </div>
