@@ -37,14 +37,14 @@
       <div class="list_header">
         <span class="count">
           Pictures (<%= @note.pictures.count %>)
-        </count>
+        </span>
         <span class="command">
           <%= link_to "[new]", new_note_picture_path(@note) %>
         </span>
       </div>
 
       <ul class="pictures_list">
-        <%= render @pictures %>
+        <%= render @pictures, mode: "notes" %>
       </ul>
     <% end %>
 
@@ -55,7 +55,7 @@
     <div class="list_header">
       <span class="count">
         Memos (<%= @note.memos.count %>)
-      </count>
+      </span>
 
       <% if @note.can_edit?(current_user) %>
         <span class="command">

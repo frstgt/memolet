@@ -40,7 +40,7 @@ class PicturesController < ApplicationController
   private
 
     def picture_params
-      params.require(:picture).permit(:picture)
+      params.require(:picture).permit(:picture, :title, :outline)
     end
 
     def note_is_exist

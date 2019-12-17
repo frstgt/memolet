@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191210053442) do
+ActiveRecord::Schema.define(version: 20191217093937) do
 
   create_table "memos", force: :cascade do |t|
     t.text "content"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20191210053442) do
     t.integer "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "outline"
     t.index ["note_id"], name: "index_pictures_on_note_id"
   end
 

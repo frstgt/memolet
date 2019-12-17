@@ -6,7 +6,12 @@
 
     <div class="picture-url small">
       <% if picture.picture? %>
-        <%= link_to "#{picture.picture.url}", picture.picture.url %>
+        <% if mode == "notes" %>
+          <%= "#{picture.title}: #{picture.outline}" %>
+          <%= link_to "#{picture.picture.url}", picture.picture.url %>
+        <% else %>
+          <%= "![#{picture.outline}](#{picture.picture.url} \"#{picture.title}\")" %>
+        <% end %>
       <% end %>
     </div>
 
@@ -14,11 +19,13 @@
       <%= timestamp(picture) %>
     </div>
 
-    <span class="command">
-      <%= link_to "[edit]", edit_note_picture_path(@note, picture) %>
-      <%= link_to "[delete]", note_picture_path(@note, picture),
-                              method: :delete, data: { confirm: "You sure?" } %>
-    </span>
+    <% if mode == "notes" %>
+      <span class="command">
+        <%= link_to "[edit]", edit_note_picture_path(@note, picture) %>
+        <%= link_to "[delete]", note_picture_path(@note, picture),
+                                method: :delete, data: { confirm: "You sure?" } %>
+      </span>
+    <% end %>
 
   </div>
 

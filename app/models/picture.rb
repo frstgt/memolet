@@ -2,6 +2,8 @@ class Picture < ApplicationRecord
   belongs_to :note, touch: true
 
   validates :note_id, presence: true
+  validates :title, length: { maximum: 100 }
+  validates :outline, length: { maximum: 1000 }
 
   default_scope -> { order(created_at: :asc) }
 

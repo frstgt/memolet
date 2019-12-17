@@ -5,12 +5,16 @@ class MemosController < ApplicationController
   before_action :user_can_edit
 
   def new
+    @pictures = @note.pictures
+
     @memo = @note.memos.build
     @max = @note.memos.count + 1
     @value = @max
   end
 
   def create
+    @pictures = @note.pictures
+
     @memo = @note.memos.build(memo_params)
     if @memo.save
 
@@ -24,11 +28,15 @@ class MemosController < ApplicationController
   end
 
   def edit
+    @pictures = @note.pictures
+
     @max = @note.memos.count
     @value = @memo.number
   end
 
   def update
+    @pictures = @note.pictures
+
     if @memo.update_attributes(memo_params)
 
       insert_one(@note.memos, @memo)
