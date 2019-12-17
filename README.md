@@ -27,3 +27,9 @@ $ heroku config:set S3_BUCKET="Bucket Name"
 $ heroku config:set S3_REGION="Region Name"
 
 ```
+
+You can insert Google Ads to your site if you want.
+```
+$ heroku config:set GOOGLE_AD_CLIENT="AD Client Code"
+
+```
