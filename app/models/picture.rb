@@ -5,7 +5,7 @@ class Picture < ApplicationRecord
   validates :title, length: { maximum: 100 }
   validates :outline, length: { maximum: 1000 }
 
-  default_scope -> { order(created_at: :asc) }
+  default_scope -> { order(updated_at: :desc) }
 
   mount_uploader :picture, PictureUploader
   validate  :picture_size
