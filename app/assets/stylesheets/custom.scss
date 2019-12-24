@@ -235,11 +235,12 @@ input {
     p {
       margin: initial;
       padding: initial;
-      padding-top: 10px;
+      padding-top: 1rem;
     }
     ul, ol {
       margin: initial;
       padding: initial;
+      padding-top: 3px;
       padding-left: 25px;
     }
     li {
@@ -251,6 +252,10 @@ input {
       margin: initial;
       padding: initial;
       margin-top: 5px;
+    }
+    img {
+      margin: initial;
+      padding: initial;
     }
   }
 }
