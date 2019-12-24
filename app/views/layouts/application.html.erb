@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <% if current_user.nil? # for only outsider %>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="site" content="<%= app_name %>">
+      <meta name="title" content="<%= yield(:title) %>">
+      <meta name="author" content="<%= yield(:author) %>">
+      <meta name="description" content="<%= yield(:description) %>">
+      <meta name="keywords" content="<%= yield(:keywords) %>">
+    <% end %>    
+
     <title><%= full_title(yield(:title)) %></title>
 
     <%= render 'layouts/rails_default' %>
@@ -8,10 +17,6 @@
     <%= mathjax_tag %>
 
     <% if current_user.nil? # for only outsider %>
-      <meta name="author" content="<%= yield(:author) %>">
-      <meta name="description" content="<%= yield(:description) %>">
-      <meta name="keywords" content="<%= yield(:keywords) %>">
-
       <%= render 'layouts/google_ad' %>
     <% end %>
   </head>

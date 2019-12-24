@@ -80,10 +80,11 @@ table {
   border-collapse: collapse;
   border: 2px solid black;
   margin: 0 0 1rem;
-}
-tr, th, td {
-  padding: 0 5px 0 5px; // top right bottom left
-  border: 1px solid black;
+
+  tr, th, td {
+    padding: 0 5px 0 5px; // top right bottom left
+    border: 1px solid black;
+  }
 }
 
 mark {
@@ -227,13 +228,29 @@ input {
     border-bottom: 1px solid #e8e8e8;
 
     font-size: initial;
+    h1, h2, h3, h4, h5, h6 {
+      margin: initial;
+      padding: initial;
+    }
+    p {
+      margin: initial;
+      padding: initial;
+      padding-top: 10px;
+    }
     ul, ol {
+      margin: initial;
+      padding: initial;
       padding-left: 25px;
     }
     li {
       margin: initial;
       padding: initial;
       border: initial;
+    }
+    table {
+      margin: initial;
+      padding: initial;
+      margin-top: 5px;
     }
   }
 }
