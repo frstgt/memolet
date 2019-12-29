@@ -7,6 +7,37 @@ module MarkdownHelper
   class MyRender < Redcarpet::Render::HTML
     include Rouge::Plugins::Redcarpet
 
+    def emphasis(text)
+      text.sub!(/[ \t]*\{(.*)\}/, "")
+      css = ($1) ? $1 : ""
+      "<em style=\"#{css}\">#{text}</em>"
+    end
+    def double_emphasis(text)
+      text.sub!(/[ \t]*\{(.*)\}/, "")
+      css = ($1) ? $1 : ""
+      "<strong style=\"#{css}\">#{text}</strong>"
+    end
+    def triple_emphasis(text)
+      text.sub!(/[ \t]*\{(.*)\}/, "")
+      css = ($1) ? $1 : ""
+      "<strong style=\"#{css}\"><em>#{text}</em></strong>"
+    end
+    def highlight(text)
+      text.sub!(/[ \t]*\{(.*)\}/, "")
+      css = ($1) ? $1 : ""
+      "<mark style=\"#{css}\">#{text}</mark>"
+    end
+    def quote(text)
+      text.sub!(/[ \t]*\{(.*)\}/, "")
+      css = ($1) ? $1 : ""
+      "<q style=\"#{css}\">#{text}</q>"
+    end
+    def strikethrough(text)
+      text.sub!(/[ \t]*\{(.*)\}/, "")
+      css = ($1) ? $1 : ""
+      "<del style=\"#{css}\">#{text}</del>"
+    end
+
     def is_yutube_link?(link)
       if link =~ /https\:\/\/www\.youtube\.com\/watch\?v\=([\w\-\_]+)/
         $1
@@ -38,7 +69,7 @@ module MarkdownHelper
     end
 
     def table_html(code)
-      code.gsub!(/^\{(.*)\}\n*/m, "")
+      code.sub!(/\n*\{(.*)\}\n*/m, "")
       css = $1.split(/,/) if $1
       table_style = (css && css[0]) ? css[0] : ""
       th_style = (css && css[1]) ? css[1] : ""
@@ -104,13 +135,13 @@ module MarkdownHelper
     }
     markdown_options = {
       no_intra_emphasis: true,
-      tables: true,
+      # tables: true,
       fenced_code_blocks: true,
       autolink: true,
       strikethrough: true,
       lax_spacing: true,
-      superscript: true,
-      underline: true,
+#      superscript: true,
+#      underline: true,
       highlight: true,
       quote: true,
       footnotes: true,
