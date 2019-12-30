@@ -62,15 +62,15 @@ class ApplicationController < ActionController::Base
     end
   
     rule 'expression : expression "|" expression' do |ex, e1, op, e2|
-      ex.value = "#{e1.value} OR #{e2.value}"
+      ex.value = "#{e1.value} UNION #{e2.value}"
     end
   
     rule 'expression : expression "&" expression' do |ex, e1, op, e2|
-      ex.value = "#{e1.value} AND #{e2.value}"
+      ex.value = "#{e1.value} INTERSECT #{e2.value}"
     end
-  
+
     rule 'expression : "!" expression' do |ex, op, e|
-      ex.value = "NOT #{e.value}"
+      ex.value = "SELECT note_id FROM tagships EXCEPT #{e.value}"
     end
   
     rule 'expression : "(" expression ")"' do |ex, _, e, _|
@@ -80,17 +80,17 @@ class ApplicationController < ActionController::Base
     rule 'expression : NAME' do |ex, n|
       tag = Tag.find_by(name: n.value)
       if tag
-        ex.value = "tag_id=#{tag.id}"
+        ex.value = "SELECT note_id FROM tagships WHERE tag_id=#{tag.id}"
       else
         raise "Invalid tag name"
       end
     end
   
     lexer do
-      literals '=!|&()'
+      literals '!|&()'
       ignore " \t\n"
   
-      token :NAME, /.*/
+      token :NAME, /[^!|&() ]+/
   
       on_error do |t|
         raise "Illegal character"
@@ -108,11 +108,9 @@ class ApplicationController < ActionController::Base
     tag_names.join(", ")
   end
 
-  def search_notes_with_tags(notes, tags)
-    if tags && tags != [nil]
-      tag_ids = tags.map { |tag| tag.id }
-      note_ids = "SELECT note_id FROM tagships WHERE tag_id IN (:tag_ids)"
-      notes.where("id IN (#{note_ids})", tag_ids: tag_ids)
+  def search_notes_with_tags(notes, search_sql)
+    if search_sql
+      notes.where("id IN (#{search_sql})")
     else
       notes
     end

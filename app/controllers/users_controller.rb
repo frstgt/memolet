@@ -17,22 +17,27 @@ class UsersController < ApplicationController
   end
 
   def show
-    @tag = Tag.find_by(name: params[:tag])
+    parser = SearchParse.new
+    begin
+      search_sql = parser.parse(params[:search])
+    rescue => e
+      search_sql = nil
+    end
 
     if current_user
       if current_user?(@user)
-        @all_notes = search_notes_with_tags(@user.notes, [@tag])
+        @all_notes = search_notes_with_tags(@user.notes, search_sql)
         @all_tags = get_tags_from_notes(@user.notes)
         @author = @description = @keywords = ""
       else
         no_local_notes = @user.notes.where.not(mode: Note::MODE_LOCAL)
-        @all_notes = search_notes_with_tags(no_local_notes, [@tag])
+        @all_notes = search_notes_with_tags(no_local_notes, search_sql)
         @all_tags = get_tags_from_notes(no_local_notes)
         @author = @description = @keywords = ""
       end
     else
       web_notes = @user.notes.where(mode: Note::MODE_WEB)
-      @all_notes = search_notes_with_tags(web_notes, [@tag])
+      @all_notes = search_notes_with_tags(web_notes, search_sql)
       @all_tags = get_tags_from_notes(web_notes)
       @author = @user.name
       @description = @user.outline

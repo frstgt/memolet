@@ -35,7 +35,7 @@
 
     <div class="tags small">
       <% @all_tags.each do |tag| %>
-        <%= link_to tag.name, user_path(@user, tag: tag.name) %>
+        <%= link_to tag.name, user_path(@user, search: "#{tag.name}") %>
       <% end %>
     </div>
 

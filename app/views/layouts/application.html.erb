@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% if current_user.nil? # for only outsider %>
+    <% if Rails.env.production? && current_user.nil? # for only outsider %>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta name="site" content="<%= app_name %>">
       <meta name="title" content="<%= yield(:title) %>">

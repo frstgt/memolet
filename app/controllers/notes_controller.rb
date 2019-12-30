@@ -5,16 +5,21 @@ class NotesController < ApplicationController
   before_action :user_can_edit,  only: [:edit, :update, :destroy]
 
   def index
-    @tag = Tag.find_by(name: params[:tag])
+    parser = SearchParse.new
+    begin
+      search_sql = parser.parse(params[:search])
+    rescue => e
+      search_sql = nil
+    end
 
     if current_user
       no_local_notes = Note.where.not(mode: Note::MODE_LOCAL)
-      @all_notes = search_notes_with_tags(no_local_notes, [@tag])
+      @all_notes = search_notes_with_tags(no_local_notes, search_sql)
       @all_tags = get_tags_from_notes(no_local_notes)
       @keywords = ""
     else
       web_notes = Note.where(mode: Note::MODE_WEB)
-      @all_notes = search_notes_with_tags(web_notes, [@tag])
+      @all_notes = search_notes_with_tags(web_notes, search_sql)
       @all_tags = get_tags_from_notes(web_notes)
       @keywords = make_tag_list(@all_tags)
     end
