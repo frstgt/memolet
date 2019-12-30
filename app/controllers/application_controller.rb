@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
+  require 'rly'
+
   def logged_in_user
     unless logged_in?
       store_location
@@ -9,6 +11,8 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  # memos operations
 
   def insert_one(ones, new_one)
     if new_one.number < 1 then
@@ -42,6 +46,57 @@ class ApplicationController < ActionController::Base
         one.update_attributes({number: new_number})
       end
       new_number += 1
+    end
+  end
+
+  # tags operations
+
+  class SearchParse < Rly::Yacc
+  
+    precedence :left,  '|'
+    precedence :left,  '&'
+    precedence :right, '!'
+  
+    rule 'statement : expression' do |st, e|
+      st.value = e.value
+    end
+  
+    rule 'expression : expression "|" expression' do |ex, e1, op, e2|
+      ex.value = "#{e1.value} OR #{e2.value}"
+    end
+  
+    rule 'expression : expression "&" expression' do |ex, e1, op, e2|
+      ex.value = "#{e1.value} AND #{e2.value}"
+    end
+  
+    rule 'expression : "!" expression' do |ex, op, e|
+      ex.value = "NOT #{e.value}"
+    end
+  
+    rule 'expression : "(" expression ")"' do |ex, _, e, _|
+      ex.value = "(#{e.value})"
+    end
+  
+    rule 'expression : NAME' do |ex, n|
+      tag = Tag.find_by(name: n.value)
+      if tag
+        ex.value = "tag_id=#{tag.id}"
+      else
+        raise "Invalid tag name"
+      end
+    end
+  
+    lexer do
+      literals '=!|&()'
+      ignore " \t\n"
+  
+      token :NAME, /.*/
+  
+      on_error do |t|
+        raise "Illegal character"
+        t.lexer.pos += 1
+        nil
+      end
     end
   end
 

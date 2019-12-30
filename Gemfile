@@ -32,6 +32,8 @@ gem 'redcarpet',                '>= 3.4.0'
 gem 'rouge',                    '>= 3.3.0'
 gem 'mathjax-rails',            '>= 2.6.1'
 
+gem 'rly', '0.2.3'
+
 # gem 'therubyracer', platforms: :ruby
 # gem 'redis', '~> 4.0'
 # gem 'capistrano-rails', group: :development
