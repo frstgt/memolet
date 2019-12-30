@@ -15,9 +15,9 @@
       <span class="tags small">
         <% note.tags.each do |tag| %>
           <% if user %>
-            <%= link_to tag.name, user_path(user, tag: tag.name) %>
+            <%= link_to tag.name, user_path(user, search: "#{tag.name}") %>
           <% else %>
-            <%= link_to tag.name, notes_path(tag: tag.name) %>
+            <%= link_to tag.name, notes_path(search: "#{tag.name}") %>
           <% end %>
         <% end %>
       </span>

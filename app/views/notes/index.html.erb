@@ -13,6 +13,11 @@
       <% end %>
     </div>
 
+    <%= form_tag(notes_path, :method => "get", id: "search-form", class: "form-inline") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "search tags", class: "form-control form-control-sm w-75 ml-auto" %>
+      <%= submit_tag "search", class: "form-control form-control-sm ml-2 mr-auto" %>
+    <% end %>
+
     <%= render 'static_pages/home_logos' %>
 
   </aside>
