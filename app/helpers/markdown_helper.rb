@@ -68,6 +68,12 @@ module MarkdownHelper
       end
     end
 
+    def image(link, title, alt_text)
+      link.sub!(/[ \t]*\{(.*)\}/, "")
+      css = ($1) ? $1 : ""
+      "<img src=#{link} title=#{title} alt=#{alt_text} style=\"#{css}\"/>"
+    end
+
     def table_html(code)
       code.sub!(/\n*\{(.*)\}\n*/m, "")
       css = $1.split(/,/) if $1
