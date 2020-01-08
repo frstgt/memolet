@@ -40,8 +40,9 @@
     </div>
 
     <%= form_tag(user_path(@user), :method => "get", id: "search-form", class: "form-inline") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "search tags", class: "form-control form-control-sm w-75 ml-auto" %>
-      <%= submit_tag "search", class: "form-control form-control-sm ml-2 mr-auto" %>
+        <%= text_field_tag :search, params[:search], placeholder: "search tags", class: "form-control form-control-sm w-75 ml-auto mb-0" %>
+        <%= submit_tag "search", class: "form-control form-control-sm ml-2 mr-auto mb-0" %>
+        <%= content_tag :span, "e.g. tag1 & ! (tag2 | tag3)", class: "small ml-auto text-muted" %>
     <% end %>
 
   </aside>
