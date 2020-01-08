@@ -108,7 +108,7 @@ class ApplicationController < ActionController::Base
     tag_names.join(", ")
   end
 
-  def search_notes_with_tags(notes, search_sql)
+  def search_notes_with_sql(notes, search_sql)
     if search_sql
       notes.where("id IN (#{search_sql})")
     else

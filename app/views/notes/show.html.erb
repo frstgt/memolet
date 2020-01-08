@@ -16,9 +16,7 @@
       </div>
 
       <span class="tags small">
-        <% @note.tags.each do |tag| %>
-          <%= tag.name %>
-        <% end %>
+        <%= @note.tags.map{ |tag| tag.name }.join(" ") %>
       </span>
 
       <div class="outline">

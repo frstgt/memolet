@@ -14,12 +14,12 @@ class NotesController < ApplicationController
 
     if current_user
       no_local_notes = Note.where.not(mode: Note::MODE_LOCAL)
-      @all_notes = search_notes_with_tags(no_local_notes, search_sql)
+      @all_notes = search_notes_with_sql(no_local_notes, search_sql)
       @all_tags = get_tags_from_notes(no_local_notes)
       @keywords = ""
     else
       web_notes = Note.where(mode: Note::MODE_WEB)
-      @all_notes = search_notes_with_tags(web_notes, search_sql)
+      @all_notes = search_notes_with_sql(web_notes, search_sql)
       @all_tags = get_tags_from_notes(web_notes)
       @keywords = make_tag_list(@all_tags)
     end

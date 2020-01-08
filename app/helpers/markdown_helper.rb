@@ -38,7 +38,7 @@ module MarkdownHelper
       "<del style=\"#{css}\">#{text}</del>"
     end
 
-    def is_yutube_link?(link)
+    def is_youtube_link?(link)
       if link =~ /https\:\/\/www\.youtube\.com\/watch\?v\=([\w\-\_]+)/
         $1
       elsif link =~ /https\:\/\/youtu\.be\/([\w\-\_]+)/
@@ -47,22 +47,22 @@ module MarkdownHelper
         nil
       end
     end
-    def yutube_embed_link(id)
+    def youtube_embed_link(id)
       "<iframe width=\"517\" height=\"291\" src=\"https://www.youtube.com/embed/#{id}\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>"
     end
 
     def link(link, title, content)
       link = CGI::escapeHTML(link)
-      if id = is_yutube_link?(link)
-        yutube_embed_link(id) # ignore title and content
+      if id = is_youtube_link?(link)
+        youtube_embed_link(id) # ignore title and content
       else
         "<a href=\"#{link}\" title=\"#{title}\">#{content}</a>"
       end
     end
     def autolink(link, link_type)
       link = CGI::escapeHTML(link)
-      if id = is_yutube_link?(link)
-        yutube_embed_link(id)
+      if id = is_youtube_link?(link)
+        youtube_embed_link(id)
       else
         "<a href=\"#{link}\">#{link}</a>"
       end
