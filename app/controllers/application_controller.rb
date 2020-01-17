@@ -90,8 +90,8 @@ class ApplicationController < ActionController::Base
       literals '!|&()'
       ignore " \t\n"
   
-      token :NAME, /[^!|&() ]+/
-  
+      token :NAME, Tag::VALID_TAG_REGEX
+
       on_error do |t|
         raise "Illegal character"
         t.lexer.pos += 1

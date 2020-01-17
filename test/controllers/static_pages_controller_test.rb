@@ -7,11 +7,11 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
-  test "should get home" do
-    skip "implement is changed"
+  test "should get notes#index as home" do
     get root_path
     assert_response :success
-    assert_select "title", "#{@base_title}"
+    assert_template 'notes/index'
+    assert_select "title", "Notes | #{@base_title}"
   end
 
 end

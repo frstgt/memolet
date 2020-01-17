@@ -67,7 +67,9 @@ class Note < ApplicationRecord
       end
     else
       tag = Tag.create(name: tag_name)
-      active_tagships.create(tag_id: tag.id)
+      if tag
+        active_tagships.create(tag_id: tag.id)
+      end
     end
   end
 

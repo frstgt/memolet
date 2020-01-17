@@ -17,8 +17,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   end
 
   test "login with valid information followed by logout" do
-    skip "imprement is changed"
-    
     get login_path
     post login_path, params: { session: { name:    @user.name,
                                           password: 'z81Km$@3rTEp#+2S' } }

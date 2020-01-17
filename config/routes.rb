@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   mathjax 'mathjax'
 
-  root 'static_pages#home'
+#  root 'static_pages#home'
+  root 'notes#index'
 
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'

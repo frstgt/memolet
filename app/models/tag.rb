@@ -5,8 +5,12 @@ class Tag < ApplicationRecord
                               dependent:   :destroy
   has_many :notes, through: :passive_tagships,  source: :note
 
+  # should be enable to include - _
+  # should not be enable to include \s & | () !
+  VALID_TAG_REGEX = /[^\s\+\/\*\%\^\&\|\~\<\=\>\"\'\`\;\:\[\]\{\}\(\)\!\?\@\#\$\,\.\\]+/
   validates :name, presence: true,
                     length: { maximum: 100 },
+                    format: { with: VALID_TAG_REGEX },
                     uniqueness: true
 
 end
